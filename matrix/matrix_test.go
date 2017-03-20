@@ -44,3 +44,35 @@ func TestProduct(t *testing.T) {
 	C, _ := Product(A, B)
 	C.Print()
 }
+
+func TestTransport(t *testing.T) {
+	A := New(3, 2)
+	A.Set(0, 0, 3)
+	A.Set(0, 1, -2)
+	A.Set(1, 0, 2)
+	A.Set(1, 1, 4)
+	A.Set(2, 0, 1)
+	A.Set(2, 1, -3)
+
+	A.Print()
+
+	B := A.T()
+
+	B.Print()
+}
+
+func TestCopy(t *testing.T) {
+	A := New(3, 2)
+	A.Set(0, 0, 3)
+	A.Set(0, 1, -2)
+	A.Set(1, 0, 2)
+	A.Set(1, 1, 4)
+	A.Set(2, 0, 1)
+	A.Set(2, 1, -3)
+
+	A.Print()
+
+	B := A.Copy()
+
+	B.Print()
+}
