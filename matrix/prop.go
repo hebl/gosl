@@ -1,5 +1,35 @@
 package matrix
 
+import "github.com/hebl/gosl/vector"
+
+//Row Get row r
+func (m *Matrix) Row(r int) *vector.Vector {
+	v, err := vector.Zeros(m.size2)
+	if err != nil {
+		return nil
+	}
+	offset := r * m.size2
+	for i := 0; i < m.size2; i++ {
+		v.Set(i, m.data[offset+i])
+	}
+
+	return v
+}
+
+//Col Get Col c
+func (m *Matrix) Col(c int) *vector.Vector {
+	v, err := vector.Zeros(m.size1)
+	if err != nil {
+		return nil
+	}
+	offset := c
+	for i := 0; i < m.size1; i++ {
+		v.Set(i, m.data[i*m.tda+offset])
+	}
+
+	return v
+}
+
 //Copy matrix hard copy
 func (m *Matrix) Copy() *Matrix {
 	m2 := New(m.size1, m.size2)
@@ -9,7 +39,7 @@ func (m *Matrix) Copy() *Matrix {
 	return m2
 }
 
-//T matrix transport
+//T matrix transpose
 func (m *Matrix) T() *Matrix {
 	m2 := New(m.size2, m.size1)
 
