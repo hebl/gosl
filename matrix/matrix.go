@@ -53,6 +53,11 @@ func (m *Matrix) Set(i, j int, v float64) {
 	m.data[i*m.tda+j] = v
 }
 
+//Shape matrix shape
+func (m *Matrix) Shape() (int, int) {
+	return m.size1, m.size2
+}
+
 //Print print matrix
 func (m *Matrix) Print() {
 	for i := 0; i < m.size1; i++ {

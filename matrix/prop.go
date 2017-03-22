@@ -1,6 +1,9 @@
 package matrix
 
-import "github.com/hebl/gosl/vector"
+import (
+	"github.com/hebl/gosl/errors"
+	"github.com/hebl/gosl/vector"
+)
 
 //Row Get row r
 func (m *Matrix) Row(r int) *vector.Vector {
@@ -50,6 +53,37 @@ func (m *Matrix) T() *Matrix {
 	}
 
 	return m2
+}
+
+//SwapRows swap row i, j
+func (m *Matrix) SwapRows(i, j int) error {
+	if i >= m.size1 || j >= m.size1 {
+		return errors.ErrINVAL
+	}
+
+	for k := 0; k < m.size2; k++ {
+		m.data[i*m.tda+k], m.data[j*m.tda+k] = m.data[j*m.tda+k], m.data[i*m.tda+k]
+	}
+
+	return nil
+}
+
+//SwapCols swap col i, j
+func (m *Matrix) SwapCols(i, j int) error {
+	if i >= m.size2 || j >= m.size2 {
+		return errors.ErrINVAL
+	}
+
+	for k := 0; k < m.size1; k++ {
+		m.data[k*m.tda+i], m.data[k*m.tda+j] = m.data[k*m.tda+j], m.data[k*m.tda+i]
+	}
+
+	return nil
+}
+
+//Singular is singular?
+func (m *Matrix) Singular() int {
+	return 0
 }
 
 //Norm1 norm
