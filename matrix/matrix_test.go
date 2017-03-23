@@ -76,3 +76,27 @@ func TestCopy(t *testing.T) {
 
 	B.Print()
 }
+
+func TestSwapRows(t *testing.T) {
+
+	A := LoadFromArray(3, 2, []float64{3, -2, 2, 4, 1, -3})
+
+	A.Print()
+
+	A.SwapRows(1, 2)
+	A.Print()
+
+	A.SwapCols(0, 1)
+	A.Print()
+}
+
+func TestLoadFromArray(t *testing.T) {
+	A := LoadFromArray(2, 2, []float64{1, 2, 3, 4, 5})
+	A.Print()
+}
+
+func TestLoadFromStr(t *testing.T) {
+	str := "[1 2 3   9; 4 5    7;9]"
+	A := LoadFromStr(str)
+	A.Print()
+}
