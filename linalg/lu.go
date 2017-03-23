@@ -13,6 +13,8 @@ LU_decomp
 */
 
 //LU LU decomp
+// See Golub & Van Loan, Matrix Computations, Algorithm 3.4.1 (Gauss
+// Elimination with Partial Pivoting).
 func LU(A *matrix.Matrix) (*permutation.Permutation, error) {
 	size1, size2 := A.Shape()
 	if size1 != size2 {
@@ -58,4 +60,34 @@ func LU(A *matrix.Matrix) (*permutation.Permutation, error) {
 	}
 
 	return p, nil
+}
+
+//LUP L,U,P = LUP(A)
+func LUP(A *matrix.Matrix) (*matrix.Matrix, *matrix.Matrix, *matrix.Matrix) {
+	B := A.Copy()
+	p, err := LU(B)
+
+	if err != nil {
+		return nil, nil, nil
+	}
+
+	N := p.Size()
+
+	L := matrix.Identity(N)
+	U := matrix.Zeros(N, N)
+
+	P := p.Matrix()
+
+	for i := 0; i < N; i++ {
+		for j := 0; j < N; j++ {
+			if i > j {
+				L.Set(i, j, B.At(i, j))
+			} else {
+				U.Set(i, j, B.At(i, j))
+			}
+
+		}
+	}
+
+	return L, U, P
 }

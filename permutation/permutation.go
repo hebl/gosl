@@ -1,7 +1,11 @@
 package permutation
 
-import "github.com/hebl/gosl/errors"
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/hebl/gosl/errors"
+	"github.com/hebl/gosl/matrix"
+)
 
 //Permutation permutations
 type Permutation struct {
@@ -38,4 +42,13 @@ func (p *Permutation) Swap(i, j int) error {
 //Print print
 func (p *Permutation) Print() {
 	fmt.Println(p.data)
+}
+
+//Matrix matrix view
+func (p *Permutation) Matrix() *matrix.Matrix {
+	m := matrix.Zeros(p.size, p.size)
+	for i := 0; i < p.size; i++ {
+		m.Set(i, p.data[i], 1)
+	}
+	return m
 }
