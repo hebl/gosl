@@ -39,11 +39,6 @@ func (p *Permutation) Swap(i, j int) error {
 	return nil
 }
 
-//Print print
-func (p *Permutation) Print() {
-	fmt.Println(p.data)
-}
-
 //Matrix matrix view
 func (p *Permutation) Matrix() *matrix.Matrix {
 	m := matrix.Zeros(p.size, p.size)
@@ -51,4 +46,26 @@ func (p *Permutation) Matrix() *matrix.Matrix {
 		m.Set(i, p.data[i], 1)
 	}
 	return m
+}
+
+//Print print
+func (p *Permutation) Print() {
+	fmt.Println(p.data)
+}
+
+//Mprint print
+func (p *Permutation) Mprint() {
+	fmt.Print("\n")
+	for i := 0; i < p.size; i++ {
+		fmt.Print("   ")
+		for j := 0; j < p.size; j++ {
+			if j == p.data[i] {
+				fmt.Printf("%4d", 1)
+			} else {
+				fmt.Printf("%4d", 0)
+			}
+		}
+		fmt.Print("\n")
+	}
+	fmt.Print("\n")
 }
