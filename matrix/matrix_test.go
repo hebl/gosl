@@ -12,10 +12,18 @@ func TestMatrix1(t *testing.T) {
 		}
 	}
 	A.Print()
+
+	B := A.Copy()
+	B.Print()
 }
 
 func TestOnes(t *testing.T) {
 	A := Identity(10)
+	A.Print()
+}
+
+func TestRand(t *testing.T) {
+	A := Rand(6, 6)
 	A.Print()
 }
 

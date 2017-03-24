@@ -2,6 +2,7 @@ package matrix
 
 import (
 	"fmt"
+	"math/rand"
 	"strings"
 )
 
@@ -25,6 +26,15 @@ func Identity(n int) *Matrix {
 	mat := NewS(n)
 	for i := 0; i < n; i++ {
 		mat.data[i*mat.tda+i] = 1.0
+	}
+	return mat
+}
+
+//Rand Rand float64 [0.0,1.0)
+func Rand(n, m int) *Matrix {
+	mat := New(n, m)
+	for i := 0; i < n*m; i++ {
+		mat.data[i] = rand.Float64()
 	}
 	return mat
 }
