@@ -1,3 +1,7 @@
+// Copyright 2017 HE Boliang. All rights reserved.
+// Use of this source code is governed by a MIT-style
+// license that can be found in the LICENSE file.
+
 package vector
 
 import (
@@ -24,6 +28,7 @@ func (v *Vector) Norm2() float64 {
 
 //NormInf norm
 func (v *Vector) NormInf() float64 {
+
 	return 0
 }
 
@@ -39,7 +44,26 @@ func (v *Vector) Mean() float64 {
 //Median Median of vector
 //TODO
 func (v *Vector) Median() float64 {
-	return 0
+	lhs := (v.size - 1) / 2
+	rhs := v.size / 2
+	var median float64
+
+	if v.IsSorted() {
+		if lhs == rhs {
+			median = v.data[lhs]
+		} else {
+			median = (v.data[lhs] + v.data[rhs]) / 2.0
+		}
+	} else {
+		v2 := v.Copy()
+		v2.Sort()
+		if lhs == rhs {
+			median = v2.data[lhs]
+		} else {
+			median = (v2.data[lhs] + v2.data[rhs]) / 2.0
+		}
+	}
+	return median
 }
 
 //Variance variance of vector

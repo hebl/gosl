@@ -1,6 +1,12 @@
+// Copyright 2017 HE Boliang. All rights reserved.
+// Use of this source code is governed by a MIT-style
+// license that can be found in the LICENSE file.
+
 package vector
 
 import (
+	"math/rand"
+
 	"github.com/hebl/gosl/errors"
 )
 
@@ -19,24 +25,20 @@ type Vector struct {
 }
 
 //New new vector
-func New(n int, data []float64) (*Vector, error) {
-	if len(data) != n && data != nil {
-		return nil, errors.RETFAILURE
-	}
+func New(n int) *Vector {
 
-	if data == nil {
-		data = make([]float64, n)
-	}
+	data := make([]float64, n)
+
 	v := &Vector{
-		size:   len(data),
+		size:   n,
 		stride: 1,
 		data:   data,
 	}
-	return v, nil
+	return v
 }
 
-//Len vector length
-func (v *Vector) Len() int {
+//Size vector length
+func (v *Vector) Size() int {
 	return v.size
 }
 
@@ -58,6 +60,18 @@ func (v *Vector) At(i int) float64 {
 func (v *Vector) Set(i int, val float64) {
 	v.checkidx(i)
 	v.data[i] = val
+}
+
+//GetData Get vector data
+func (v *Vector) GetData() *[]float64 {
+	return &v.data
+}
+
+//Copy vector copy
+func (v *Vector) Copy() *Vector {
+	v2 := New(v.size)
+	copy(v2.data, v.data)
+	return v2
 }
 
 //========================================
@@ -96,4 +110,13 @@ func Zeros(n int) (*Vector, error) {
 	}
 
 	return v, nil
+}
+
+//Rand rand value
+func Rand(n int) *Vector {
+	v := New(n)
+	for i := range v.data {
+		v.data[i] = rand.Float64()
+	}
+	return v
 }

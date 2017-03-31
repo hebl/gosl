@@ -1,10 +1,14 @@
+// Copyright 2017 HE Boliang. All rights reserved.
+// Use of this source code is governed by a MIT-style
+// license that can be found in the LICENSE file.
+
 package vector
 
 import "testing"
 
 var (
-	v, _ = New(10, []float64{1, 2, 3, 4, 5, 6, 7, 8, 9, 10})
-	a, _ = New(10, []float64{10, 9, 8, 7, 6, 5, 4, 3, 2, 1})
+	v = Rand(10)
+	a = Rand(10)
 )
 
 func TestAdd(t *testing.T) {
@@ -42,4 +46,25 @@ func TestNorm(t *testing.T) {
 	n2 := v.Norm2()
 
 	t.Log(n1, n2)
+}
+
+func TestSort(t *testing.T) {
+	n1 := Rand(20)
+	t.Log("Before Sorted")
+	n1.Print("%7.2f")
+	n1.Sort()
+	t.Log("Sorted")
+	n1.Print("%7.2f")
+
+}
+
+func TestMedian(t *testing.T) {
+	n1 := Rand(20)
+	t.Log("Before Sorted")
+	n1.Print("%7.2f")
+
+	t.Log(n1.Median())
+	n1.Sort()
+	t.Log("Sorted")
+	n1.Print("%7.2f")
 }
