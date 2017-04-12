@@ -7,6 +7,8 @@ package vector
 import (
 	"fmt"
 
+	"math"
+
 	"github.com/hebl/gosl/errors"
 )
 
@@ -29,6 +31,43 @@ func (v *Vector) Min() float64 {
 	return min
 }
 
+//MinIndex returns the minimum value
+func (v *Vector) MinIndex() int {
+	min := v.data[0]
+	idx := 0
+	for i := 1; i < v.size; i++ {
+		if v.data[i] < min {
+			min = v.data[i]
+			idx = i
+		}
+	}
+	return idx
+}
+
+//AMin returns the minimum abs value
+func (v *Vector) AMin() float64 {
+	min := math.Abs(v.data[0])
+	for i := 1; i < v.size; i++ {
+		if math.Abs(v.data[i]) < min {
+			min = math.Abs(v.data[i])
+		}
+	}
+	return min
+}
+
+//AMinIndex returns the minimum abs value
+func (v *Vector) AMinIndex() int {
+	min := math.Abs(v.data[0])
+	idx := 0
+	for i := 1; i < v.size; i++ {
+		if math.Abs(v.data[i]) < min {
+			min = math.Abs(v.data[i])
+			idx = i
+		}
+	}
+	return idx
+}
+
 //Max returns the maximum value
 func (v *Vector) Max() float64 {
 	max := v.data[0]
@@ -38,6 +77,43 @@ func (v *Vector) Max() float64 {
 		}
 	}
 	return max
+}
+
+//MaxIndex returns the maximum value
+func (v *Vector) MaxIndex() int {
+	max := v.data[0]
+	idx := 0
+	for i := 1; i < v.size; i++ {
+		if v.data[i] > max {
+			max = v.data[i]
+			idx = i
+		}
+	}
+	return idx
+}
+
+//AMax returns the maximum abs value
+func (v *Vector) AMax() float64 {
+	max := math.Abs(v.data[0])
+	for i := 1; i < v.size; i++ {
+		if math.Abs(v.data[i]) > max {
+			max = math.Abs(v.data[i])
+		}
+	}
+	return max
+}
+
+//AMaxIndex returns the maximum abs value
+func (v *Vector) AMaxIndex() int {
+	max := math.Abs(v.data[0])
+	idx := 0
+	for i := 1; i < v.size; i++ {
+		if math.Abs(v.data[i]) > max {
+			max = math.Abs(v.data[i])
+			idx = i
+		}
+	}
+	return idx
 }
 
 //Add add
